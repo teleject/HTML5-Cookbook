@@ -1,0 +1,336 @@
+chapter: Fundamental Syntax and Semantics
+==================
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML5, for Fun &amp; Profit</title>
+    </head>
+    <body>
+    </body>
+</html>
+    
+    
+====================================
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    
+    
+====================================
+<meta charset="UTF-8" />
+    
+    
+====================================
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    
+====================================
+&#169;
+    
+    
+====================================
+&copy;
+    
+    
+====================================
+<html lang="en">
+    
+    
+====================================
+<link rel="stylesheet" href="styles.css" />
+<script src="scripts.js"></script>
+    
+    
+====================================
+<header>
+    <h1><abbr title="Hypertext Markup Language">HTML</abbr>5, for Fun &amp;
+        Profit</h1>
+    <nav>
+        <ul>
+            <li><a href="/Archive/">Archive</a></li>
+            <li><a href="/About/">About</a></li>
+        </ul>
+    </nav>
+</header>
+<article>
+    <h2><code>nav</code> Isn't for <em>All</em> Links</h2>
+    <p>Though the <code>nav</code> element often contains links, that doesn't mean
+       that <em>all</em> links on a site need <code>nav</code>.</p>
+</article>
+<article>
+    <h2>You've Got the <code>DOCTYPE</code>. Now What?</h2>
+    <p>HTML5 isn't an all or nothing proposition. You can pick and choose what
+       works best for you. So once you have the <code>DOCTYPE</code> in place, you
+       should explore.</p>
+</article>
+<aside>
+    <h2>HTML5 Elsewhere</h2>
+    <p>Feed your HTML5 fix with resources from our partners:</p>
+    <ul>
+        <li><a href="http://lovinghtml5.com">Loving HTML5</a></li>
+        <li><a href="http://semanticsally.com">Semantic Sally</a></li>
+    </ul>
+</aside>
+<footer>
+    <p>Copyright &copy; 2011 <a href="http://html5funprofit.com">HTM5, for Fun
+       &amp; Profit</a>. All rights reserved.</p>
+</footer>
+    
+    
+====================================
+header, footer, nav, article, aside, section {
+    display: block;
+}
+    
+    
+====================================
+<script>
+    document.createElement('header');
+    document.createElement('footer');
+    document.createElement('nav');
+    document.createElement('article');
+    document.createElement('aside');
+    document.createElement('section');
+</script>
+    
+    
+====================================
+<article>
+    <h2><code>nav</code> Isn't for <em>All</em> Links</h2>
+    <p>Though the <code>nav</code> element often contains links, that doesn't mean
+       that <em>all</em> links on a site need <code>nav</code>.</p>
+</article>
+<article>
+    <h2>You've Got the <code>DOCTYPE</code>. Now What?</h2>
+    <p>HTML5 isn't an all or nothing proposition. You can pick and choose what
+       works best for you. So once you have the <code>DOCTYPE</code> in place, you
+       should explore.</p>
+</article>
+    
+    
+====================================
+<section>
+    <article>
+        <h2><code>nav</code> Isn't for <em>All</em> Links</h2>
+        <p>Though the <code>nav</code> element often contains links, that doesn't
+           mean that <em>all</em> links on a site need <code>nav</code>.</p>
+    </article>
+    <article>
+        <h2>You've Got the <code>DOCTYPE</code>. Now What?</h2>
+        <p>HTML5 isn't an all or nothing proposition. You can pick and choose what
+           works best for you. So once you have the <code>DOCTYPE</code> in place,
+           you should explore.</p>
+    </article>
+</section>
+    
+    
+====================================
+<section>
+    <h1>Most Recent Blog Posts</h1>
+    <article>
+        <h2><code>nav</code> Isn't for <em>All</em> Links</h2>
+        <p>Though the <code>nav</code> element often contains links, that doesn't
+           mean that <em>all</em> links on a site need <code>nav</code>.</p>
+    </article>
+    <article>
+        <h2>You've Got the <code>DOCTYPE</code>. Now What?</h2>
+        <p>HTML5 isn't an all or nothing proposition. You can pick and choose what
+           works best for you. So once you have the <code>DOCTYPE</code> in place,
+           you should explore.</p>
+    </article>
+</section>
+    
+    
+====================================
+<section>
+    <h1>Most Recent Blog Posts</h1>
+    <article>
+        <h2><code>nav</code> Isn't for <em>All</em> Links</h2>
+        <p>Though the <code>nav</code> element often contains links, that doesn't
+           mean that <em>all</em> links on a site need <code>nav</code>.</p>
+    </article>
+    <article>
+        <h2>You've Got the <code>DOCTYPE</code>. Now What?</h2>
+        <p>HTML5 isn't an all or nothing proposition. You can pick and choose what
+           works best for you. So once you have the <code>DOCTYPE</code> in place,
+           you should explore.</p>
+    </article>
+</section>
+    
+    
+====================================
+<section>
+    <h6>Most Recent Blog Posts</h6>
+    <article>
+        <h1><code>nav</code> Isn't for <em>All</em> Links</h1>
+        <p>Though the <code>nav</code> element often contains links, that doesn't
+           mean that <em>all</em> links on a site need <code>nav</code>.</p>
+    </article>
+    <article>
+        <h1>You've Got the <code>DOCTYPE</code>. Now What?</h1>
+        <p>HTML5 isn't an all or nothing proposition. You can pick and choose what
+           works best for you. So once you have the <code>DOCTYPE</code> in place,
+           you should explore.</p>
+    </article>
+</section>
+    
+    
+====================================
+<section>
+    <h1>You've Got the <code>DOCTYPE</code>, Now What?</h1>
+    <h2>Simplified <code>link</code>s and <code>script</code>s</h2>
+    <p>HTML5's more flexible and simplified syntax ...</p>
+    <h2>Block-Level Links</h2>
+    <p>With HTML5, <code>a</code>s can contain block ...</p>
+    <h3>Looking Back</h3>
+    <p>In earlier versions of HTML, you had to ...</p>
+    <h2>Add Structure</h2>
+    <p>HTML5 gives us several new elements to add ...</p>
+</section>
+    
+    
+====================================
+<hgroup>
+    <h1>HTML5, for Fun &amp; Profit</h1>
+    <h2>Tips, Tricks and Resources</h2>
+</hgroup>
+    
+    
+====================================
+<hgroup>
+    <h2>Tips, Tricks and Resources</h2>
+    <h1>HTML5, for Fun &amp; Profit</h1>
+</hgroup>
+    
+    
+====================================
+<p>My name is <em>Jane</em>, not John.</p>
+    
+    
+====================================
+<p>Sally thought to herself, <i>when will IE6 die?</i></p>
+    
+    
+====================================
+<p><strong>Registration is required</strong> for this event.</p>
+    
+    
+====================================
+<p><b>Once upon a time,</b> there was a man who lost his mind.</p>
+    
+    
+====================================
+<p>Your search for <mark>awesomesauce</mark> resulted in 923 entries:</p>
+    
+    
+====================================
+<p><small>The owner of this blog is not responsible for mind blowage. Please
+   consume at your own risk.</small></p>
+<p><small>Copyright &copy; 2011 Awesomest Blog. All rights reserved.</small></p>
+    
+    
+====================================
+<abbr title="Accessible Rich Internet Applications">ARIA</abbr>
+    
+    
+====================================
+<a href="http://html5funprofit.com">
+    <h1>HTML5, for Fun &amp; Profit</h1>
+    <img src="logo.png" alt="HTML5 for Fun and Profit" />
+</a>
+    
+    
+====================================
+<h1><a href="http://html5funprofit.com">HTML5, for Fun &amp; Profit</a></h1>
+<a href="http://html5funprofit.com"><img src="logo.png" alt="HTML5 for Fun and
+   Profit" /></a>
+    
+    
+====================================
+<figure>
+    <img src="chart.png" alt="Chart of increasing awesomeness" />
+    <figcaption>The increasing amount of awesome that this blog
+        demonstrates.</figcaption>
+</figure>
+    
+    
+====================================
+<p>Published: <time datetime="2011-01-15">January 15, 2011</time></p>
+    
+    
+====================================
+<p>The class starts at <time datetime="08:00">8:00 am</time>.</p>
+    
+    
+====================================
+<p>Registration opens on <time datetime="2011-01-15T08:00-07:00">January 15, 2011
+   at 8:00 am, Mountain Time</time>.</p>
+    
+    
+====================================
+<p>Published: <time>2011-01-15</time></p>
+    
+    
+====================================
+<p>Published: <time datetime="2011-01-09" pubdate>January 9, 2011</time></p>
+    
+    
+====================================
+<details>
+    <summary>Upcoming Topics</summary>
+    <p>For the new year, we have a great line up of articles!</p>
+    <ul>
+        <li>Understanding the Outline Algorithm</li>
+        <li>When to Use <code>hgroup</code></li>
+        <li>Machine Semantics with Microdata</li>
+    </ul>
+</details>
+    
+    
+====================================
+<details open>
+    
+    
+====================================
+<ol start="3">
+    <li>Apples</li>
+    <li>Oranges</li>
+    <li>Bananas</li>
+</ol>
+    
+    
+====================================
+<ol reversed>
+    <li>Apples</li>
+    <li>Oranges</li>
+    <li>Bananas</li>
+</ol>
+    
+    
+====================================
+<p>The results are in for your favorite fruit, and we have a tie for first place!</p>
+<ol>
+    <li value="1">Bananas</li>
+    <li value="1">Oranges</li>
+    <li value="2">Apples</li>
+</ol>
+    
+    
+====================================
+<p hidden>As a special deal for members, use discount code AWESOMESAUCE and save
+   10% off all purchases from these vendors.</p>
+    
+    
+====================================
+<article contenteditable>
+    <h2>Stop <code>section</code> Abuse!</h2>
+    <p>As the most generic of the HTML5 structural elements, <code>section</code>
+       is often incorrectly used as a styling container, when <code>div</code> is
+       more appropriate.</p>
+</article>
+    
+    
+====================================
+<h2 draggable>Block-Level Links</h2>
+    
+    
+==================

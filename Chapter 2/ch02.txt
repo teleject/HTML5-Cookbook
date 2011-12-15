@@ -1,0 +1,189 @@
+chapter: Progressive Markup and Techniques
+==================
+<header>
+    <h1>Riddles of the Sphinx</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/contact/">Contact Me</a></li>
+        </ul>
+    </nav>
+</header>
+    
+    
+====================================
+header {
+    width: 600px;
+    height: 25px;
+    background-color: #ccffff;
+    border: 2px solid #66cc99;
+    padding: 10px;
+}
+
+nav {
+    width: 100%;
+    float: left;
+    list-style: none;
+}
+
+nav li {
+    float: left;
+    padding-right: 7px;
+}
+    
+    
+====================================
+<script>
+    document.createElement("header");
+    document.createElement("nav");
+    document.createElement("footer");
+</script>
+    
+    
+====================================
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+    
+    
+====================================
+<img src="vscover.jpg" alt="Veil &amp; Subdue: Courtship of the Black Sultan"/>
+<div id="caption">
+    <div id="audio">
+        <audio>
+            <source src="turnthepage.ogg">
+            <source src="turnthepage.mp3">
+        </audio>
+        <p><input type=button onclick="playPause()" value=" " tabindex="0" />
+           &ldquo;Turn the Page&rdquo; / <em>Veil &amp; Subdue</em> / Paul
+           Ramey</p>
+    </div>
+</div><!--end caption-->
+    
+    
+====================================
+<script src="js/modernizr-1.6.min.js"></script>
+    
+    
+====================================
+<script>
+if (Modernizr.audio) {
+    function playPause() {
+        var myAudio = document.getElementsByTagName('audio')[0];
+        if(myAudio.paused)
+            myAudio.play();
+        else
+            myAudio.pause();
+    }
+}
+</script>
+    
+    
+====================================
+.no-audio #audio {
+    display: none;
+}
+
+.audio #audio input[type="button"] {
+    width: 45px;
+    height: 29px;
+    background: url(button.png);
+    border: 0px solid #000;
+    float: left;
+    margin-right: 10px;
+}
+    
+    
+====================================
+<div id="error">
+    <p>&ldquo;Turn the Page&rdquo; / <em>Veil &amp; Subdue</em> / Paul Ramey</p>
+    <div id="error-box">
+        <p>Too bad! This browser does not support the audio features on this page.
+           Might I suggest installing the latest version of your browser?</p>
+    </div>
+</div>
+    
+    
+====================================
+.audio #error {
+    display: none;
+}
+
+.no-audio #error-box {
+    background-color: #ffffcc;
+    padding: 1px 10px;
+    color: #000;
+    border: 5px solid #ffff66;
+
+}
+.no-audio #error-box a {
+    color: #333;
+}
+    
+    
+====================================
+/* Primary Styles
+   Author:
+*/
+    
+    
+====================================
+/*
+ * Media queries for responsive design
+ * These follow after primary styles so they will successfully override.
+ */
+    
+    
+====================================
+<div id="header">
+    <h1>living with simplicity</h1>
+    <div id="tagline">
+        life. joy. simple.
+    </div>
+    <div class="nav">
+        <ul>
+            <li><a href="about/">About</a></li>
+            <li><a href="archives/">Archives</a></li>
+            <li><a href="contact/">Contact Me</a></li>
+            <li><a href="subscribe/">Subscribe</a></li>
+        </ul>
+    </div><!--end nav-->
+</div><!--end header-->
+    
+    
+====================================
+<div class="posts">
+    <div class="article">
+        <div class="header">
+            <h1>10 ways to eat ethically, cheaply, and well</h1>
+            <div class="meta">Posted on <span class="date">February 1st, 2011</span>
+            </div>
+        </div><!--end header-->
+        [Post Content]
+        <div class="footer">
+            <div class="meta">Tags: <a href="tags/simplicity" rel="tags">
+             simplicity</a>, <a href="tags/food">food</a></div>
+        </div><!--end footer-->
+    </div><!--end article-->
+    <div class="article">
+        <div class="header">
+            <h1>adventures in composting</h1>
+            <div class="meta">Posted on <span class="date">January 15th, 2011</span>
+            </div>
+        </div><!--end header-->
+        [Post Content]
+        <div class="footer">
+        <div class="meta">Tags: <a href="tags/simplicity" rel="tags">simplicity</a>, 
+        <a href="tags/green/" rel="tags">green</a></div>
+        </div><!--end footer-->
+    </div><!--end article-->
+</div><!--end posts-->`
+    
+    
+====================================
+<div id="footer"> <p>&copy; 2011 Christina Ramey</p> </div>
+    
+    
+==================

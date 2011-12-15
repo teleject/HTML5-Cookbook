@@ -1,0 +1,365 @@
+chapter: Forms
+==================
+<form>
+    <p><label>Search <input type="search" name="query"></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+input[type="search"] {
+    border-radius: 10px;
+}
+    
+    
+====================================
+<form>
+    <fieldset>
+        <legend>Contact Information</legend>
+        <p><label>E-mail address <input type="email" name="email"></label></p>
+        <p><label>Web site <input type="url" name="website"></label></p>
+        <p><label>Telephone number <input type="tel" name="phone"></label></p>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<input type="url" name="website" title="That doesn't look like a valid web
+    address.">
+    
+    
+====================================
+<form>
+    <p><label>Appointment Date and Time <input type="datetime"
+        name="dateAndTime"></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <fieldset>
+        <legend>Appointment Request</legend>
+        <p><label>Date <input type="date" name="date"></label></p>
+        <p><label>Time <input type="time" name="time"></label></p>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <fieldset>
+        <legend>Appointment Request</legend>
+        <p><label>Date <input type="date" name="date" min="2011-03-15"
+            max="2012-03-14"></label></p>
+        <p><label>Time <input type="time" name="time" min="08:00"
+            max="18:00"></label></p>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <p><label>Quantity <input type="number" name="quantity"></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <p><label>Quantity (must order in pairs of 2) <input type="number"
+        name="quantity" min="2" max="20" step="2"></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <p><label>Volume <input type="range" name="volume"
+        min="0" max="10" step=".5" value="5"></label></p>
+</form>
+    
+    
+====================================
+<form>
+    <p><label>Background color <input type="color" name="bg"></label></p>
+    <p><label>Foreground color <input type="color" name="fg"></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <p><label>Donation amount <input type="text" name="donation"
+        list="donations"></label></p>
+    <datalist id="donations">
+        <option value="10.00">10.00</option>
+        <option value="25.00">25.00</option>
+        <option value="50.00">50.00</option>
+    </datalist>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <p><label for="donation">Donation amount</label>
+    <datalist id="donations">
+        <select name="donation">
+            <option></option>
+            <option value="10.00">10.00</option>
+            <option value="25.00">25.00</option>
+            <option value="50.00">50.00</option>
+            <option>Other</option>
+        </select>
+        If other, please specify:
+    </datalist>
+    <input type="text" id="donation" name="donation" list="donations"></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <fieldset>
+        <legend>Login</legend>
+        <p><label>Username <input type="text" name="username" required></label></p>
+        <p><label>Password <input type="password" name="pwd" required></label></p>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <p><label>Search <input type="search" name="query" autofocus></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <fieldset>
+        <legend>Contact Information</legend>
+        <p><label>E-mail address <input type="email" name="email"
+            placeholder="user@domain.com"></label></p>
+        <p><label>Web site <input type="url" name="website"
+            placeholder="http://www.domain.com/"></label></p>
+        <p><label>Telephone number <input type="tel" name="phone"
+            placeholder="123-123-1234"></label></p>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <fieldset>
+        <legend>Login</legend>
+        <p><label>Username <input type="text" name="username"></label></p>
+        <p><label>Password <input type="password" name="pwd"
+            autocomplete="off"></label></p>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<form>
+    <p><label>Telephone number <input type="tel" name="phone"
+        pattern="[2-9][0-9]{2}-[0-9]{3}-[0-9]{4}"
+        title="North American format: XXX-XXX-XXXX"></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<head>
+    <script src="modernizer.js"></script>
+</head>
+    
+    
+====================================
+<form>
+    <p><label>Search <input type="search" name="query" id="query"
+        autofocus></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<script>
+    if (!Modernizr.input.autofocus) {
+        document.getElementById("query").focus();
+    }
+</script>
+    
+    
+====================================
+<head>
+    <script src="modernizer.js"></script>
+    <script src="jquery.js"></script>
+</head>
+    
+    
+====================================
+<form id="search">
+    <p><label>Search <input type="search" name="query" id="query" value=""
+        placeholder="Enter query"></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<script>
+    if (!Modernizr.input.placeholder) {
+        $("#query").focus(function() {
+            if ($("#query").val() == $("#query").attr('placeholder')) {
+                $("#query").val("");
+            }
+        });
+        $("#query").blur(function() {
+            if ($("#query").val() == "") {
+                $("#query").val($("#query").attr('placeholder'));
+            }
+        });
+        $("#query").blur();
+        $("#search").submit(function() {
+            if ($("#query").val() ==
+        $("#query").attr('placeholder')) {
+            return false;
+            }
+        });
+    }
+</script>
+    
+    
+====================================
+<head>
+    <script src="modernizr.js"></script>
+    <script src="jquery.js"></script>
+    <script src="jquery-ui.js"></script>
+    <link href="jquery-ui.css" rel="stylesheet">
+</head>
+    
+    
+====================================
+<form>
+    <p><label>Date of Birth <input type="date" name="dob" id="dob"></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<script>
+    if (!Modernizr.inputtypes.datetime) {
+        $("#dob").datepicker();
+    }
+</script>
+    
+    
+====================================
+<head>
+    <script src="modernizer.js"></script>
+    <script src="jquery.js"></script>
+</head>
+    
+    
+====================================
+<form>
+    <fieldset>
+        <legend>Login</legend>
+        <p><label>Username <input type="text" name="username" required></label></p>
+        <p><label>Password <input type="password" name="password" required
+            pattern="[0-9a-zA-Z]{12}" title="Must be 12 alphanumeric
+            characters"></label></p>
+    </fieldset>
+    <p><button type="submit">Submit</button></p>
+</form>
+    
+    
+====================================
+<script>
+if (!Modernizr.input.required || !Modernizr.input.pattern) {
+    $('form').submit(function() {
+        var validData = true;
+        $('[required], [pattern]').each(function() {
+            if (($(this).attr('required') !== false) && ($(this).val() == "")){
+                $(this).focus();
+                alert("The " + $(this).attr('name') + " field is required!");
+                validData = false;
+                return false;
+            }
+            if ($(this).attr('pattern')){
+                var regexp = new RegExp($(this).attr('pattern'));
+                if (!regexp.test($(this).val())){
+                    $(this).focus();
+                    alert("The data in the " + $(this).attr('name') +
+                          " field isn't in the right format!");
+                    validData = false;
+                    return false;
+                }
+            }
+        });
+        return validData;
+    });
+}
+</script>
+    
+    
+====================================
+<!DOCTYPE html>
+<html>
+<head>
+<title>Appointment Scheduler</title>
+</head>
+
+<body>
+<h1>Appointment Scheduler</h1>
+
+<form>
+
+    <fieldset>
+        <legend>Personal Information</legend>
+        <p><label>Name <input type="text" name="name" required></label></p>
+        <p><label>Telephone number <input type="tel" name="phone" required
+            pattern="[2-9][0-9]{2}-[0-9]{3}-[0-9]{4}" title="North American format:
+            XXX-XXX-XXXX"></label></p>
+        <p><label>E-mail address <input type="email" name="email"></label></p>
+        <p><label>Date of birth <input type="date" name="dob"></label></p>
+    </fieldset>
+
+    <fieldset>
+        <legend>Appointment Request</legend>
+        <p><label for="reason">What is the reason for your visit?</label>
+        <datalist id="reasons">
+            <select name="reason">
+                <option>Annual physical</option>
+                <option>Cold or flu symptoms</option>
+                <option>Blood test</option>
+                <option>Post-operative</option>
+                <option>Other</option>
+            </select>
+        If other, please specify:
+        </datalist>
+        <input id="reason" name="reason" list="reasons"></p>
+        <p><label>Current pain level <input type="range" name="pain" min="0"
+            max="10" step=".5" value="5" title="0 is no pain, 10 is worst pain
+            imaginable"></label></p>
+        <p><label>Preferred date <input type="date" name="date" required
+            min="2011-03-15" max="2012-03-14"></label></p>
+        <p><label>Preferred time <input type="time" name="time" required
+            min="08:00" max="18:00" step="1:00"></label></p>
+    </fieldset>
+
+    <p><button type="submit">Submit</button></p>
+</form>
+
+</body>
+</html>
+    
+    
+==================

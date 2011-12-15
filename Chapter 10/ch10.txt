@@ -1,0 +1,544 @@
+chapter: Advanced HTML5 JavaScript
+==================
+var storage_support = window.sessionStorage || window.localStorage;
+    
+    
+====================================
+var user_id = "A1B2C3D4";
+var user_data = {
+    name: "Tom Hanks",
+    occupation: "Actor",
+    favorite_color: "Blue"
+    // ...
+};
+
+sessionStorage.setItem(user_id, JSON.stringify(user_data));
+    
+    
+====================================
+var user_id = "A1B2C3D4";
+var user_prefs = {
+    keep_me_logged_in: true,
+    start_page: "daily news"
+   // ...
+};
+
+localStorage.setItem(user_id, JSON.stringify(user_prefs));
+    
+    
+====================================
+var user_id = "A1B2C3D4";
+var user_data = { /* defaults */ };
+var user_prefs = { /* defaults */ };
+
+if (sessionStorage.getItem(user_id)) {
+    user_data = JSON.parse(sessionStorage.getItem(user_id));
+}
+if (localStorage.getItem(user_id)) {
+    user_prefs = JSON.parse(localStorage.getItem(user_id));
+}
+    
+    
+====================================
+// first, store the currently viewed item in the history
+var current_item = {
+    id: "ABCD0123",
+    data: "Mens' Running Shoes",
+    ts: new Date() // current timestamp, used for expiration check later
+};
+localStorage.setItem(current_item.id, JSON.stringify(current_item));
+
+// then manually "expire" all old entries
+var key, data;
+
+for (var i=0; i<localStorage.length; i++) {
+    key = localStorage.key(i);
+    data = localStorage.getItem(key);
+    if (data.ts < ((new Date()) - 60*60*24*21)) { // more than 21 days old
+        localStorage.removeItem(key);
+    }
+}
+    
+    
+====================================
+var appcache_support = !!window.applicationCache;
+    
+    
+====================================
+CACHE MANIFEST
+
+CACHE:
+index.html
+help.html
+style/default.css
+images/logo.png
+images/backgound.png
+    
+    
+====================================
+<html manifest="cache.manifest">
+    
+    
+====================================
+CACHE MANIFEST
+# cache version: 1257
+
+CACHE:
+index.html
+help.html
+style/default.css
+images/logo.png
+images/backgound.png
+    
+    
+====================================
+var cache = applicationCache;
+cache.addEventListener("updateready", function(){
+    if (cache.stats == cache.UPDATEREADY) {
+        cache.swapCache(); // swap in the new cache items
+    }
+}, false);
+    
+    
+====================================
+var cache = applicationCache;
+cache.addEventListener("updateready", function(){
+    if (cache.stats == cache.UPDATEREADY) {
+        if (confirm("This site has been updated. Do you want to reload?")) {
+            location.reload();
+        }
+    }
+}, false);
+    
+    
+====================================
+function updateAppcache(){
+    var cache = applicationCache;
+    cache.update(); // check to see if the cache manifest file has been updated
+
+    cache.addEventListener("updateready", function(){
+    if (cache.stats == cache.UPDATEREADY) {
+            if (confirm("This site has been updated. Do you want to reload?")) {
+                location.reload();
+            }
+        }
+    }, false);
+}
+    
+    
+====================================
+var dnd_support = 'draggable' in document.createElement('span');
+    
+    
+====================================
+<style>
+#foobar { background-color:yellow; width:100px; height:100px; cursor:move; }
+#catcher { background-color:blue; width:150px; height:150px; padding:5px;
+    margin-bottom:5px; }
+</style>
+    
+    
+====================================
+<div id="catcher">...</div>
+<div id="foobar" draggable="true">...</div>
+    
+    
+====================================
+var foobar = document.getElementById("foobar");
+foobar.addEventListener("dragstart", function(evt) {
+    this.style.border = "3px dotted #000"; // black dotted-line border
+}, false);
+    
+    
+====================================
+var catcher = document.getElementById("catcher"); // catch the dropped element
+catcher.addEventListener("dragenter", function(evt) {
+    this.style.border = "3px solid red"; // give the catcher a red border
+}, false);
+
+catcher.addEventListener("dragleave", function(evt) {
+    this.style.border = ""; // remove the border from the catcher
+}, false);
+
+catcher.addEventListener("dragover", function(evt) {
+    if (evt.preventDefault) evt.preventDefault();
+    return false;
+}, false);
+    
+    
+====================================
+foobar.addEventListener("dragstart", function(evt) {
+    this.style.border = "3px dotted #000"; // black dotted-line border
+
+    evt.dataTransfer.effectAllowed = "move";
+    evt.dataTransfer.setData("Text", this.id);
+}, false);
+    
+    
+====================================
+foobar.addEventListener("dragend", function(evt) {
+    this.style.border = ""; // remove the border
+}, false);
+
+catcher.addEventListener("drop", function(evt) {
+    if (evt.preventDefault) evt.preventDefault();
+    if (evt.stopPropagation) evt.stopPropagation();
+
+    this.style.border = ""; // remove the border from the catcher
+
+    var id = evt.dataTransfer.getData("Text"); // get the id
+    var elem = document.getElementById(id);
+    elem.parentNode.removeChild(elem); // remove the element
+    this.appendChild(elem); // add the element back into our catcher
+
+    return false;
+}, false);
+    
+    
+====================================
+catcher.addEventListener("drop", function(evt) {
+    if (evt.preventDefault) evt.preventDefault();
+    if (evt.stopPropagation) evt.stopPropagation();
+
+    this.style.border = ""; // remove the border from the catcher
+
+    var files_array = evt.dataTransfer.files;
+    // Now you have a reference to the file(s) that the user dragged
+    // onto your page. Do something cool with them!
+
+    return false;
+}, false);
+    
+    
+====================================
+var webworkers_support = !!window.Worker;
+    
+    
+====================================
+var data = [];
+for (var i=0; i<1500; i++) {
+    data[i] = [];
+    for (var j=0; j<1500; j++) {
+        data[i][j] = Math.random();
+    }
+}
+    
+    
+====================================
+self.onmessage = function(evt) {
+    var data = [];
+    for (var i=0; i<1500; i++) {
+        data[i] = [];
+        for (var j=0; j<1500; j++) {
+            data[i][j] = Math.random();
+        }
+    }
+
+    self.postMessage(data);
+    data = null; // unassign our copy of the data now, to free up memory
+};
+    
+    
+====================================
+var worker = new Worker("init_array.js");
+
+worker.onmessage = function(evt) {
+    alert("Data array initialization finished!");
+    var data = evt.data;
+};
+
+worker.postMessage(); // tell our worker to start its task
+    
+    
+====================================
+function doNextChunk() {
+    var done_yet = false;
+    for (var i=0; i<500; i++) { // do 500 iterations at a time
+        // do something
+        // when done, set done_yet = true
+    }
+    if (!done_yet) setTimeout(doNextChunk,0);
+    else alert("All done finally!");
+}
+
+doNextChunk();
+    
+    
+====================================
+self.onmessage = function(evt) {
+    var data = [];
+    for (var i=0; i<1500; i++) {
+        data[i] = [];
+        for (var j=0; j<1500; j++) {
+            data[i][j] = Math.random();
+            if (data[i][j] == 0) {
+                throw "I don't like zeros in my array!";
+            }
+        }
+    }
+
+    self.postMessage(data);
+    data = null; // unassign our copy of the data now, to free up memory
+};
+    
+    
+====================================
+var worker = new Worker("init_array.js");
+
+worker.onerror = function(err) {
+    alert("An error occurred in the initialization of the array.");
+    throw err; // optional
+};
+
+worker.onmessage = function(evt) {
+    alert("Data array initialization finished!");
+    var data = evt.data;
+};
+
+worker.postMessage();
+    
+    
+====================================
+if (navigator.userAgent.test(/MSIE/)) { // UA sniffing is *bad* practice!!
+    importScripts("ie_helper.js");
+}
+self.onmessage = function(evt) {
+    /* ... */
+};
+    
+    
+====================================
+self.onmessage = function(evt) {
+    setInterval(function(){
+        self.postMessage(Math.random()); // send a random number back
+    }, 60*60*1000); // execute once per hour
+};
+    
+    
+====================================
+var websockets_support = !!window.WebSocket;
+    
+    
+====================================
+<!DOCTYPE html>
+<html>
+<head>
+<title>Our Chatroom</title>
+<script src="chatroom.js"></script>
+</head>
+<body>
+<h1>Our Chatroom</h1>
+
+<div id="chatlog"></div>
+
+<input id="newmsg" /><br />
+<input type="button" value="Send Message" id="sendmsg" />
+</body>
+</html>
+    
+    
+====================================
+var chatcomm = new WebSocket("ws://something.com/server/chat");
+
+chatcomm.onmessage = function(msg) {
+    msg = JSON.parse(msg); // decode JSON into object
+
+    var chatlog = document.getElementById("chatlog");
+    var docfrag = document.createDocumentFragment();
+    var msgdiv;
+
+    for (var i=0; i<msg.messages.length; i++) {
+        msgdiv = document.createElement("div");
+        msgdiv.appendChild(document.createTextNode(msg.messages[i]));
+        docfrag.appendChild(msgdiv);
+    }
+
+    chatlog.appendChild(docfrag);
+};
+
+chatcomm.onclose = function() {
+    alert("The chatroom connection was lost. Refresh page to reconnect.");
+};
+
+document.getElementById("sendmsg").addEventListener("click", function(){
+    var newmsg = document.getElementById("newmsg");
+
+    chatcomm.send(newmsg.value); // send the message to the server
+    newmsg.value = ""; // clear out the message entry box
+}, false);
+    
+    
+====================================
+var history_support = !!(window.history && window.history.pushState);
+    
+    
+====================================
+<html>
+<head>
+<title>History Exmaple</title>
+<script>
+function showText(updateHistory) {
+    document.getElementById("long_desc").style.display = "block";
+    if (updateHistory) history.pushState(null, null, "?show");
+}
+function hideText(updateHistory) {
+    document.getElementById("long_desc").style.display = "none";
+    if (updateHistory) history.pushState(null, null, location.href.replace(/\?show/, ""));
+}
+function toggleText() {
+    var elem = document.getElementById("long_desc");
+    if (elem.style && elem.style.display == "none") showText(true);
+    else hideText(true);
+}
+function manageText() {
+    if (location.href.match(/\?show/)) showText();
+    else hideText();
+}
+
+window.addEventListener("popstate", manageText, false);
+window.addEventListener("DOMContentLoaded", function(){
+    document.getElementById("toggle").addEventListener("click", function(e){
+        toggleText();
+        e.preventDefault();
+        return false;
+    }, false);
+
+    manageText();
+}, false);
+</script>
+</head>
+<body>
+<p>Here's a short description.</p>
+<a id="toggle" href="#">toggle</a>
+<p id="long_desc">Here's a longer description, which can be shown or hidden.</p>
+</body>
+</html>
+    
+    
+====================================
+// ...
+
+function showText(updateHistory) {
+    document.getElementById("long_desc").style.display = "block";
+    if (updateHistory) history.replaceState(null, null, "?show");
+}
+function hideText(updateHistory) {
+    document.getElementById("long_desc").style.display = "none";
+    if (updateHistory) history.replaceState(null, null, location.href.replace(/\?show/, ""));
+}
+
+// ...
+    
+    
+====================================
+window.addEventListener("popstate", function(e){
+    alert("Current state data: " + JSON.stringify(e.state));
+}, false);
+
+window.pushState({foo:"bar"}, null, "?foobar");
+window.pushState({bar:"baz"}, null, "?barbaz");
+history.back(); // triggers popstate to go back to the "?foobar" page/state
+    
+    
+====================================
+var history_support = typeof FileReader != "undefined";
+    
+    
+====================================
+<p>Pick an image file:</p>
+<input type="file" id="file_selector" />
+
+<script>
+var file_selector = document.getElementById("file_selector");
+file_selector.addEventListener("change", function(){
+    var files_array = this.files;
+    // Now you have a reference to the file(s) that the user selected.
+    // Do something cool with them!
+}, false);
+</script>
+    
+    
+====================================
+function read_image_file(file) {
+    var reader = new FileReader();
+    reader.onload = function(e){
+        var image_contents = e.target.result;
+        // now you have the contents of the file
+    };
+    reader.readAsDataURL(file);
+}
+    
+    
+====================================
+<p>Pick an image file:</p>
+<input type="file" id="file_selector" />
+
+<script>
+var file_selector = document.getElementById("file_selector");
+file_selector.addEventListener("change", function(){
+    var files_array = this.files;
+    // we only allowed one file to be selected
+    if (files_array[0].type.match(/image/)) { // it's an image file
+        read_image_file(files_array[0]);
+    }
+}, false);
+
+function read_image_file(file) {
+    var reader = new FileReader();
+    reader.onload = function(e){
+        var image_contents = e.target.result;
+        var img = document.createElement("img");
+        img.src = image_contents;
+        document.body.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+}
+</script>
+    
+    
+====================================
+<p>Pick an image file:</p>
+<input type="file" id="file_selector" />
+<input type="button" id="upload" value="Upload Image" disabled />
+
+<script>
+var file_selector = document.getElementById("file_selector");
+file_selector.addEventListener("change", function(){
+    var files_array = this.files;
+    // we only allowed one file to be selected
+    if (files_array[0].type.match(/image/)) { // it's an image file
+        read_image_file(files_array[0]);
+
+        file_selector.disabled = true; // disable the file selector now
+        var upload = document.getElementById("upload");
+        upload.disabled = false;
+        upload.addEventListener("click", function(){
+            upload_file(files_array[0]);
+        }, false);
+    }
+}, false);
+
+function upload_file(file) {
+    var xhr = new XMLHttpRequest();
+    xhr.setRequestHeader("Content-Type", "multipart/form-data");
+    xhr.setRequestHeader("X-File-Name", file.fileName);
+    xhr.setRequestHeader("X-File-Size", file.fileSize);
+    xhr.setRequestHeader("X-File-Type", file.type);
+    xhr.open("GET", "image_upload.php");
+    xhr.send(file);
+}
+
+function read_image_file(file) {
+    var reader = new FileReader();
+    reader.onload = function(e){
+        var image_contents = e.target.result;
+        var img = document.createElement("img");
+        img.src = image_contents;
+        document.body.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+}
+</script>
+    
+    
+==================

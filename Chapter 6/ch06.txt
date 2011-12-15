@@ -1,0 +1,198 @@
+chapter: Microdata and Custom Data
+==================
+<p itemscope>
+    <span itemprop="inventor">Tim Berners-Lee</span> created the
+    <span itemprop="invention">World Wide Web</span>.
+</p>
+    
+    
+====================================
+<section itemscope itemtype="http://schema.org/Person">
+    <h1 itemprop="name">Tim Berners-Lee</h1>
+    <img itemprop="image"
+       src="http://www.w3.org/Press/Stock/Berners-Lee/2001-europaeum-eighth.jpg">
+    <p>
+        <span itemprop="jobTitle">Director</span>,
+        <span itemprop="affiliation" itemscope
+              itemtype="http://schema.org/Organization" itemprop="name">World Wide
+              Web Consortium</span>
+    </p>
+    <p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <span itemprop="addressLocality">Cambridge</span>,
+        <span itemprop="addressRegion">MA</span>
+    </p>
+    <a itemprop="url" href="http://www.w3.org/People/Berners-Lee/">Website at
+       W3C</a>
+</section>
+    
+    
+====================================
+<h1>My Volkswagens</h1>
+<ul>
+    <li data-year="1996" data-color="white" data-engine="VR6">Cabrio</li>
+    <li data-year="1993" data-color="purple" data-engine="VR6">Corrado</li>
+    <li data-year="2008" data-color="red" data-engine="2.0T">Eos</li>
+    <li data-year="2003" data-color="blue" data-engine="W8">Passat</li>
+</ul>
+    
+    
+====================================
+<h1>My Volkswagens</h1>
+<ul>
+    <li data-year="1996" data-color="white" data-engine="VR6">Cabrio</li>
+    <li data-year="1993" data-color="purple" data-engine="VR6">Corrado</li>
+    <li data-year="2008" data-color="red" data-engine="2.0T">Eos</li>
+    <li data-year="2003" data-color="blue" data-engine="W8">Passat</li>
+</ul>
+<p></p>
+    
+    
+====================================
+<script>
+    var cars = document.getElementsByTagName("li");
+    var output = "What color are Kimberly's cars? ";
+
+    for (var i=0; i < cars.length; i++) {
+        output += cars[i].dataset.color;
+        if (i != (cars.length-1)) {
+            output += ", "
+        }
+    }
+
+    document.getElementsByTagName("p")[0].innerHTML = output;
+</script>
+    
+    
+====================================
+    for (i=0; i < cars.length; i++) {
+        if (cars[i].dataset) {
+            output += cars[i].dataset.color;
+        } else {
+            output += cars[i].getAttribute("data-color");
+        }
+        if (i != (cars.length-1)) {
+            output += ", "
+        }
+    }
+    
+    
+====================================
+<h1>My Volkswagens</h1>
+<ul>
+    <li data-year="1996" data-color="white" data-engine="VR6">Cabrio</li>
+    <li data-year="1993" data-color="purple" data-engine="VR6">Corrado</li>
+    <li data-year="2008" data-color="red" data-engine="2.0T">Eos</li>
+    <li data-year="2003" data-color="blue" data-engine="W8">Passat</li>
+</ul>
+<p></p>
+    
+    
+====================================
+<script>
+    var cars = document.getElementsByTagName("li");
+    for (var i=0; i < cars.length; i++) {
+        if (cars[i].dataset) {
+            cars[i].dataset.color = "yellow";
+            cars[i].dataset.rating = "awesome";
+        } else {
+            cars[i].setAttribute("data-color", "yellow");
+            cars[i].setAttribute("data-rating", "awesome");
+        }
+    }
+
+    var output = "What color are Kimberly's cars? ";
+
+    for (var i=0; i < cars.length; i++) {
+        if (cars[i].dataset) {
+            output += cars[i].dataset.color;
+        } else {
+            output += cars[i].getAttribute("data-color");
+        }
+        if (i != (cars.length-1)) {
+            output += ", "
+        }
+    }
+
+    document.getElementsByTagName("p")[0].innerHTML = output;
+</script>
+    
+    
+====================================
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map example</title>
+    <script type="text/javascript"
+            src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <style type="text/css">
+        #map { height:500px; width:500px; border:1px solid #000; }
+    </style>
+</head>
+<body>
+<h1>Ice Cream in Philadelphia</h1>
+<ul>
+    <li><a data-lat="39.9530255" data-long="-75.1596066"
+           href="http://www.bassettsicecream.com/">Bassetts Ice Cream</a></li>
+    <li><a data-lat="39.949888" data-long="-75.161717"
+           href="http://www.capogirogelato.com/">Capogiro Gelateria</a></li>
+    <li><a data-lat="39.949556" data-long="-75.1428795"
+           href="http://www.franklinfountain.com/">Franklin Fountain</a></li>
+</ul>
+
+<div id="map"></div>
+
+<script>
+    var map_options = {
+        zoom: 15,
+        center: new google.maps.LatLng(39.95, −75.152),
+        mapTypeId: google.maps.MapTypeId.HYBRID
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"), map_options);
+
+    var locations = document.getElementsByTagName("a");
+    for (var i=0; i < locations.length; i++) {
+        var latitude, longitude;
+        if (locations[i].dataset) {
+            latitude = locations[i].dataset.lat;
+            longitude = locations[i].dataset.long;
+        } else {
+            latitude = locations[i].getAttribute("data-lat");
+            longitude = locations[i].getAttribute("data-long");
+        }
+        locations[i][i] = new google.maps.Marker({
+            position: new google.maps.LatLng(latitude, longitude),
+            title: locations[i].innerHTML,
+            map: map
+        });
+    }
+</script>
+</body>
+</html>
+    
+    
+====================================
+<ul>
+    <li data-year="1996" data-color="white" data-engine="VR6">Cabrio</li>
+</ul>
+
+<script>
+    alert($("li").data("year"));   // alerts "1996"
+    alert($("li").data("engine")); // alerts "VR6"
+
+    // let's repaint the car again
+    $("li").data("color", "yellow");
+
+    // and add the rating data
+    $("li").data("rating", "awesome");
+</script>
+    
+    
+====================================
+<script>
+    alert($("li").data("color")); // alerts "yellow"
+    alert(document.getElementsByTagName("li")[0].dataset.color); // alerts "white"
+</script>
+    
+    
+==================

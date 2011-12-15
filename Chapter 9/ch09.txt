@@ -1,0 +1,404 @@
+chapter: <canvas>
+==================
+<canvas id="mycanvas"></canvas>
+    
+    
+====================================
+<canvas id="mycanvas"></canvas>
+    
+    
+====================================
+var mycanvas = document.createElement("canvas");
+mycanvas.id = "mycanvas";
+document.body.appendChild(mycanvas);
+    
+    
+====================================
+var mycanvas = document.getElementById("mycanvas");
+var mycontext = mycanvas.getContext("2d");
+
+mycontext.beginPath();
+mycontext.moveTo(10, 10);
+mycontext.lineTo(35, 35); // draw a line path from (10,10) to (35,35)
+
+mycontext.strokeStyle = "#000";
+mycontext.stroke(); // draw the line
+
+mycontext.beginPath();
+mycontext.arc(35, 35, 10, 0, Math.PI * 2, true); // draw a circle
+
+mycontext.fillStyle = "#f00";
+mycontext.fill(); // fill the circle solid
+    
+    
+====================================
+var mycontext = mycanvas.getContext("2d");
+    
+    
+====================================
+mycontext.beginPath();
+mycontext.moveTo(10, 10);
+mycontext.lineTo(30, 30);
+    
+    
+====================================
+mycontext.beginPath();
+mycontext.moveTo(10, 10);
+mycontext.lineTo(30, 30);
+mycontext.stroke();
+    
+    
+====================================
+mycontext.beginPath();
+mycontext.arc(40, 40, 25, 0, Math.PI * 2, true); // draw a circle
+mycontext.closePath();
+
+mycontext.fillStyle = "#f00";
+mycontext.fill(); // fill the circle solid
+
+mycontext.beginPath();
+mycontext.arc(70, 40, 25, 0, Math.PI * 2, true); // draw a circle
+mycontext.closePath();
+
+mycontext.fillStyle = "rgba(0,0,255,0.75)";
+mycontext.fill(); // fill the circle solid;
+    
+    
+====================================
+mycontext.fillStyle = "rgba(255,0,0,0.5)";
+    
+    
+====================================
+<canvas id="mycanvas" width="200" height="200"></canvas>
+    
+    
+====================================
+mycanvas.setAttribute("width", "200"); // will change the bitmap dimensions
+mycanvas.setAttribute("height", "200");
+    
+    
+====================================
+mycanvas.width = 200; // will change the bitmap dimensions
+mycanvas.height = 200;
+    
+    
+====================================
+mycanvas.style.width = "200px";  // will shrink the horizontal rendering
+mycanvas.style.height = "200px"; // will stretch the vertical rendering
+    
+    
+====================================
+#mycanvas { width:100%; height:100%; }
+    
+    
+====================================
+window.onresize = function() {
+    mycanvas.width = document.documentElement.clientWidth;
+    mycanvas.height = document.documentElement.clientHeight;
+};
+    
+    
+====================================
+function clear(mycanvas) {
+    mycanvas.width = mycanvas.width;
+}
+    
+    
+====================================
+mycontext.lineWidth = "12";
+mycontext.lineJoin = "round";
+mycontext.moveTo(20, 20);
+mycontext.lineTo(50, 50);
+mycontext.lineTo(20, 70);
+mycontext.stroke();
+    
+    
+====================================
+var lingrad = mycontext.createLinearGradient(20,20,40,60);
+lingrad.addColorStop(0.3, "#0f0");
+lingrad.addColorStop(1, "#fff");
+mycontext.fillStyle = lingrad;
+
+mycontext.moveTo(20, 20);
+mycontext.lineTo(50, 50);
+mycontext.lineTo(20, 70);
+mycontext.closePath();
+mycontext.fill();
+    
+    
+====================================
+var img = document.getElementById("my_fish_image");
+var imgfill = mycontext.createPattern(img, "repeat");
+mycontext.fillStyle = imgfill;
+mycontext.fillRect(0, 0, 200, 200);
+    
+    
+====================================
+var img = new Image();
+img.src = "http://somewhere/to/my/image.jpg";
+    
+    
+====================================
+var img = new Image();
+img.onload = function() {
+    // note: we're calling against the "2d" context here
+    mycontext.drawImage(img, 0, 0); // draw the image at (0,0)
+};
+img.src = "http://somewhere/to/my/image.jpg";
+    
+    
+====================================
+function createCanvas(id, width, height) {
+    var canvas = document.createElement("canvas");
+    canvas.id = id;
+    canvas.setAttribute("width", width);
+    canvas.setAttribute("height", height);
+    document.body.appendChild(canvas);
+    return canvas;
+}
+
+var small_canvas = createCanvas("small", 100, 100);
+var large_canvas = createCanvas("large", 300, 300);
+var small_context = small_canvas.getContext("2d");
+var large_context = large_canvas.getContext("2d");
+
+var img = new Image();
+img.onload = function() {
+    // note: using different (sw,sh) and (dw,dh) dimensions here shrinks the image
+    small_context.drawImage(img, 0, 0, 300, 300, 0, 0, 100, 100);
+    // just grab the top-left 300×300 area from the image
+    large_context.drawImage(img, 0, 0, 300, 300);
+};
+img.src = "http://somewhere/to/my/image.jpg";
+    
+    
+====================================
+var drawing = mycontext.getImageData(0, 0, 200, 200);
+    
+    
+====================================
+var avg;
+// skip 4 entries (1 px) at a time
+for (var i = 0; i < drawing.data.length; i = i + 4) {
+    avg = (drawing.data[i] + drawing.data[i+1] + drawing.data[i+2]) / 3;
+    drawing.data[i] = drawing.data[i+1] = drawing.data[i+2] = avg;
+}
+    
+    
+====================================
+// skip 4 entries (1 px) at a time
+for (var i = 0; i < drawing.data.length; i = i + 4) {
+    drawing.data[i] = 255 - drawing.data[i]; // invert red
+    drawing.data[i+1] = 255 - drawing.data[i+1]; // invert green
+    drawing.data[i+2] = 255 - drawing.data[i+2]; // invert blue
+}
+    
+    
+====================================
+mycontext.putImageData(drawing, 0, 0); // put the image data back at (0,0)
+    
+    
+====================================
+mycontext.save();              // save the current state of the canvas
+mycontext.translate(10, 10);   // move the origin point to (10,10)
+mycontext.arc(0, 0, 10, 0, Math.PI * 2, true); // draw a circle
+mycontext.stroke();
+mycontext.restore();
+
+mycontext.save();
+mycontext.rotate(Math.PI / 4); // rotate 45 degrees clockwise
+mycontext.moveTo(0, 0);
+mycontext.lineTo(10, 0);
+mycontext.stroke();
+mycontext.restore();
+    
+    
+====================================
+mycontext.save();
+mycontext.translate(10, 0); // move coordinate system 10 pixels right
+mycontext.moveTo(0, 0);
+mycontext.lineTo(50, 0);    // line actually appears from (10,0) to (60,0)
+mycontext.stroke();
+mycontext.restore();
+
+mycontext.moveTo(10, 0);
+mycontext.lineTo(60, 0);    // same line, basically
+mycontext.stroke();
+    
+    
+====================================
+mycontext.save();
+mycontext.rotate(Math.PI / 6); // rotate 30 degrees clockwise
+mycontext.moveTo(0, 0);
+mycontext.lineTo(50, 0); // line actually angles 30 degrees down from horizontal
+mycontext.stroke();
+mycontext.restore();
+    
+    
+====================================
+mycontext.save();
+mycontext.scale(2, 1);    // scale x direction units by a factor of 2
+mycontext.moveTo(0, 0);
+mycontext.lineTo(50, 0);  // line actually appears to extend to (100,0)
+mycontext.stroke();
+mycontext.restore();
+
+mycontext.moveTo(0, 0);
+mycontext.lineTo(100, 0); // same line, basically
+mycontext.stroke();
+    
+    
+====================================
+mycontext.save();
+mycontext.rotate(Math.Pi / 4);  // rotate 45 degrees clockwise
+mycontext.drawImage(img, 0, 0); // draw the image at (0,0)
+                                // in the rotated coordinate system
+mycontext.restore();
+    
+    
+====================================
+mycontext.beginPath();
+mycontext.strokeStyle = "#f00"; // red color
+mycontext.translate(20, 20);    // move the coordinate system to (20,20) origin
+mycontext.moveTo(0, 0);         // actually (20,20)
+mycontext.lineTo(80, 10);       // actually (100,30)
+mycontext.stroke();
+
+mycontext.save();               // save <canvas> state
+
+mycontext.beginPath();
+mycontext.strokeStyle = "#00f"; // now blue color
+mycontext.rotate(Math.PI / 4);
+mycontext.moveTo(0, 0);
+mycontext.arc(0, 0, 52, Math.PI / 3, Math.PI / 6, true);
+mycontext.closePath();          // connects back to the start of the path
+mycontext.stroke();
+
+mycontext.restore();            // back to previous <canvas> state
+
+mycontext.beginPath();
+mycontext.moveTo(80, 10);
+mycontext.lineTo(14, 50);
+mycontext.stroke();
+    
+    
+====================================
+mycontext.font = "25pt Arial";
+    
+    
+====================================
+mycontext.fillText("Hello World", 0, 25);
+mycontext.strokeText("Hello World", 0, 75);
+    
+    
+====================================
+mycontext.beginPath();
+mycontext.arc(50, 50, 25, 0, Math.PI * 2, true); // circle path
+mycontext.clip(); // make the path our clipping mask
+
+mycontext.fillStyle = "#f00";
+mycontext.font = "50pt Arial";
+mycontext.fillText("H", 25, 75);
+    
+    
+====================================
+mycontext.save();
+mycontext.beginPath();
+mycontext.arc(50, 50, 25, 0, Math.PI * 2, true); // circle path
+mycontext.clip(); // make the path our clipping mask
+
+mycontext.fillStyle = "#f00";
+mycontext.font = "50pt Arial";
+mycontext.fillText("H", 25, 75);
+mycontext.restore(); // back to default <canvas> state (including clipping)
+
+mycontext.font = "25pt Arial";
+mycontext.fillText("ello World", 70, 70); // black text, not clipped
+    
+    
+====================================
+function draw_circle(x, y) {
+    mycontext.fillStyle = "#f00";
+    mycontext.beginPath();
+    mycontext.arc(x, y, 10, 0, Math.PI * 2, true);
+    mycontext.fill();
+}
+
+function erase_frame() {
+    mycanvas.width = mycanvas.width;
+}
+
+var ball_x = 50;
+var ball_y = 50;
+var delta = 3;
+
+draw_circle(ball_x, ball_y);
+
+setInterval(function(){
+    if (ball_x > 100 || ball_y < 15 || ball_x < 15 || ball_y > 100) {
+        delta *= −1;
+    }
+    ball_x += delta;
+    ball_y += delta;
+    erase_frame();
+    draw_circle(ball_x, ball_y);
+}, 35);
+    
+    
+====================================
+function draw_circle(x, y) {
+    mycontext.fillStyle = "#f00";
+    mycontext.beginPath();
+    mycontext.arc(x, y, 10, 0, Math.PI * 2, true);
+    mycontext.fill();
+}
+
+function erase_circle(x, y) {
+    mycontext.clearRect(x-10, y-10, 20, 20);
+}
+
+var ball_x = 50;
+var ball_y = 50;
+var delta = 3;
+
+draw_circle(ball_x, ball_y);
+
+setInterval(function(){
+    if (ball_x > 100 || ball_y < 15 || ball_x < 15 || ball_y > 100) {
+        delta *= −1;
+    }
+    erase_circle(ball_x, ball_y);
+    ball_x += delta;
+    ball_y += delta;
+    draw_circle(ball_x, ball_y);
+}, 35);
+    
+    
+====================================
+<script src="jquery.js"></script>
+<script src="jquery.flot.js"></script>
+    
+    
+====================================
+<div id="my_graph" style="width:600px; height:300px"></div>
+    
+    
+====================================
+var graph_data = [[0, 3], [4, 8], [8, 5], [9, 13]];
+    
+    
+====================================
+var my_graph = $("#my_graph");  // get a reference to the placeholder
+$.plot(my_graph, [graph_data]); // pass the graph data as one data series
+    
+    
+====================================
+var canvas = $("canvas", my_graph)[0];
+var image_data = canvas.toDataURL("image/png");
+    
+    
+====================================
+$.post("http://location/path/to/upload", {data: image_data});
+    
+    
+==================

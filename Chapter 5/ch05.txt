@@ -1,0 +1,193 @@
+chapter: Native Video
+==================
+<video src="video.ogv"></video>
+    
+    
+====================================
+<video src="video.ogv" controls></video>
+    
+    
+====================================
+<video src="video.ogv" controls preload></controls>
+    
+    
+====================================
+<video src="video.ogv" controls>
+    Your device does not support HTML5 video. <a href="video.ogg">Download the
+    Learning to Love HTML5 introductory video</a>.
+</video>
+    
+    
+====================================
+<video src="video.ogv" controls>
+    <object type="application/x-shockwave-flash"
+            data="player.swf?file="video.mp4">
+        <param name="movie" value="player.swf?file="video.mp4">
+        <a href="video.mp4">Download the Learning to Love HTML5
+            introductory video</a>
+    </object>
+</video>
+    
+    
+====================================
+<video controls>
+    <source src="video.mp4" />
+    <source src="video.ogv" />
+    Your device does not support HTML5 video.
+</video>
+    
+    
+====================================
+<source src="video.mp4" type="video/mp4" />
+<source src="video.ogv" type="video/ogg" />
+    
+    
+====================================
+<source src="video.ogv" type="video/ogg; codecs='theora'">
+    
+    
+====================================
+type="video/ogg; codecs='theora, vorbis'"
+type="video/mp4; codecs='avc1.42E01E'"
+type="video/webm; codecs='vp8, vorbis'"
+    
+    
+====================================
+<video controls width="640" height="360">
+    <source src="video.mp4" type="video/mp4" />
+    <source src="video.ogv" type="video/ogg" />
+    Your device does not support HTML5 video.
+</video>
+    
+    
+====================================
+<video controls width="640" height="360" poster="video_still.png">
+    <source src="video.mp4" type="video/mp4" />
+    <source src="video.ogv" type="video/ogg" />
+    Your device does not support HTML5 video.
+</video>
+    
+    
+====================================
+<video controls width="640" height="360" loop>
+    <source src="video.mp4" type="video/mp4" />
+    <source src="video.ogv" type="video/ogg" />
+    Your device does not support HTML5 video.
+</video>
+    
+    
+====================================
+<video id="origVideo" width="640" height="360">
+    <source src="video.mp4" type="video/mp4" />
+    <source src="video.ogv" type="video/ogg" />
+    Your device does not support HTML5 video.
+</video>
+
+<button title="Generate Preview" onclick="generatePreview();">Generate
+    Preview</button>
+
+<canvas id="previewMed"></canvas>
+<canvas id="previewSm"></canvas>
+    
+    
+====================================
+<script>
+    function generatePreview(){
+        var video = document.getElementById('origVideo');
+        var canvas1 = document.getElementById('previewMed');
+        var context1 = canvas1.getContext('2d');
+        var canvas2 = document.getElementById('previewsSm');
+        var context2 = canvas2.getContext('2d');
+    
+    
+====================================
+        canvas1.width = 320;
+        canvas1.height = 180;
+        canvas2.width = 160;
+        canvas2.height = 90;
+    
+    
+====================================
+        video.addEventListener('play', function(){
+            drawVideo(this,context1,context2);
+        },false);
+    
+    
+====================================
+        video.play();
+    }
+    
+    
+====================================
+    function drawVideo(video,canvas1,canvas2) {
+        if(video.paused || video.ended) return false;
+        canvas1.drawImage(video,0,0,320,180);
+        canvas2.drawImage(video,0,0,160,90);
+        setTimeout(drawVideos,25,video,canvas1,canvas2);
+    }
+</script>
+    
+    
+====================================
+if(video.paused || video.ended) return false;
+    
+    
+====================================
+canvas1.drawImage(video,0,0,320,180);
+    
+    
+====================================
+canvas2.drawImage(video,0,0,160,90);
+    
+    
+====================================
+object.drawImage(source,x,y,width,height);
+    
+    
+====================================
+setTimeout(drawVideos,25,video,canvas1,canvas2);
+    
+    
+====================================
+<video id="origVideo" width="640" height="360">
+    <source src="video.mp4" type="video/mp4" />
+    <source src="video.ogv" type="video/ogg" />
+    Your device does not support HTML5 video.
+</video>
+
+<button title="Generate Preview" onclick="generatePreview();">Generate
+    Preview</button>
+
+<canvas id="previewMed"></canvas>
+<canvas id="previewSm"></canvas>
+
+<script>
+    function generatePreview(){
+        var video = document.getElementById('origVideo');
+        var canvas1 = document.getElementById('previewMed');
+        var context1 = canvas1.getContext('2d');
+        var canvas2 = document.getElementById('previewsSm');
+        var context2 = canvas2.getContext('2d');
+
+        canvas1.width = 320;
+        canvas1.height = 180;
+        canvas2.width = 160;
+        canvas2.height = 90;
+
+        video.addEventListener('play', function(){
+            drawVideo(this,context1,context2);
+        },false);
+
+        video.play();
+    }
+
+    function drawVideo(video,canvas1,canvas2) {
+        if(video.paused || video.ended) return false;
+        canvas1.drawImage(video,0,0,320,180);
+        canvas2.drawImage(video,0,0,160,90);
+        setTimeout(drawVideos,25,video,canvas1,canvas2);
+    }
+</script>
+    
+    
+==================

@@ -1,0 +1,293 @@
+chapter: Accessibility
+==================
+<img src="next_button.jpg" alt="Go to the next page.">
+    
+    
+====================================
+<a href="diagram_desc.html"><img src="diagram.jpg" alt="Diagram that shows how
+   to assemble the item with a link to the assembly instructions"></a>
+    
+    
+====================================
+<h1 id="johnny1">Johnny throwing cake at his Mom while Dad ducks behind her</h1>
+<p id="johnny2">Johnny's poor Mom is smeared with cake. Well, that shirt is
+   ruined!</p>
+ ...
+<img src="johnny_1st_bd.jpg" aria-describedby="johnny1 johnny2" alt="Johnny's
+   first birthday party">
+    
+    
+====================================
+<figure>
+    <img src="ceremony_photo.jpg" aria-labelledby="figcaption123">
+    <figcaption id="figcaption123">
+        Opening ceremony for the new library building at the state university.
+    </figcaption>
+</figure>
+    
+    
+====================================
+<img src="border_decoration.jpg" alt="">
+    
+    
+====================================
+.border {
+    background-image: url(border_decoration.jpg);
+    background-repeat: repeat-x;
+}
+    
+    
+====================================
+<figure>
+    <img src="ceremony_photo.jpg">
+    <figcaption>
+        Opening ceremony for the new library building at the state university.
+    </figcaption>
+</figure>
+    
+    
+====================================
+Web Content Accessibility Guidelines (WCAG) 2.0 was released as a World Wide
+Web Consortium (W3C) recommendation in December 2008.
+    
+    
+====================================
+<p><abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.0 was
+released as a <abbr title="World Wide Web Consortium">W3C</abbr> recommendation
+in December 2008.</p>
+    
+    
+====================================
+<p><abbr title="National Aeronautics and Space Administration">NASA</abbr>'s
+mission <abbr title="Space Transportation System">STS</abbr>−133 is the last
+flight scheduled for Space Shuttle Discovery.</p>
+    
+    
+====================================
+abbr { border-bottom: 1px dotted black;}
+    
+    
+====================================
+<header role="banner">
+    
+    
+====================================
+<aside role="complementary">
+    
+    
+====================================
+<nav role="navigation">
+    
+    
+====================================
+<form role="form">
+    
+    
+====================================
+<form role="search">
+    
+    
+====================================
+<footer role="contentinfo">
+    <p>Copyright 2011</p>
+</footer>
+    
+    
+====================================
+<footer>
+...
+   <p role="contentInfo">Copyright 2011</p>
+...
+</footer>
+    
+    
+====================================
+<div role="application">
+...
+</div>
+    
+    
+====================================
+<div role="main">
+    
+    
+====================================
+<article role="main">
+    
+    
+====================================
+<nav role="navigation">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Portfolio</a></li>
+    </ul>
+</nav>
+    
+    
+====================================
+<nav role="navigation">
+    <ol>
+        <li><a href="#">Chapter 1</a></li>
+        <li><a href="#">Chapter 2</a></li>
+        <li><a href="#">Chapter 3</a></li>
+    </ol>
+</nav>
+    
+    
+====================================
+<div id="offscreen"><a href="#maincontent">Skip to the main content</a></div>
+...
+<nav role="navigation">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Portfolio</a></li>
+    </ul>
+</nav>
+...
+<article id="maincontent" role="main">
+...
+    
+    
+====================================
+<nav role="navigation">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Portfolio</a></li>
+    </ul>
+</nav>
+...
+<article>
+    
+    
+====================================
+.offscreen {
+    left: −9999em;
+    position: absolute;
+    top: auto;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+}
+    
+    
+====================================
+<label for="fName">First Name</label>
+<input type="text" id="fname">
+    
+    
+====================================
+<form>
+    <fieldset>
+        <legend>Account Logout</legend>
+        <span id="labelAutoLogout">Automatically log out after</span>
+        <input id="autoLogout" type="text" value="30"
+               aria-labelledby="labelAutoLogout labelAutoLogoutTime"
+               aria-describedby="autoLogoutDesc">
+        <span id="labelAutoLogoutTime">minutes of inactivity</span>
+        <p id="autoLogoutDesc">Allows you to customize the timeout period for
+           each of your accounts.</p>
+    </fieldset>
+</form>
+    
+    
+====================================
+<form>
+    <fieldset>
+    <legend>Movie Rating</legend>
+    <p><input type="radio" name="rating" id="rating1">
+    <label for="rating1">Excellent</label></p>
+    <p><input type="radio" name="rating" id="rating2">
+    <label for="rating2">Good</label></p>
+    <p><input type="radio" name="rating" id="rating3">
+    <label for="rating3">Fair</label></p>
+    <p><input type="radio" name="rating" id="rating4">
+    <label for="rating4">Poor</label></p>
+    </fieldset>
+</form>
+    
+    
+====================================
+<form>
+    <fieldset>
+        <legend>Store Credit Card</legend>
+        <p><label>Name displayed on your card:<input name="fullName"
+            required></label></p>
+        <fieldset name="accountNum" disabled>
+            <legend>
+                <label>
+                    <input type="radio" name="accountType"
+                           onchange="form.accountNum.disabled = !checked;
+                           form.accountLetters.disabled=checked">My account is a
+                           12-digit number
+                </label>
+            </legend>
+            <p><label>Store card number: <input name="cardNum"
+                required></label></p>
+        </fieldset>
+        <fieldset name="accountLetters" disabled>
+            <legend>
+                <label>
+                    <input type="radio" name="accountType"
+                           onchange="form.accountLetters.disabled = !checked;
+                           form.accountNum.disabled=checked">My account includes
+                           letters and numbers
+                </label>
+            </legend>
+            <p><label>Store card code: <input name="cardLetters"></label></p>
+        </fieldset>
+    </fieldset>
+</form>
+    
+    
+====================================
+<p><label for="fName">First Name (Required)</label></p>
+<p><input type="text" id="fname"></p>
+    
+    
+====================================
+<label for="fName">
+    <img src="required-icon.jpg" alt="Required">
+    First Name
+</label>
+<input type="text" id="fname">
+    
+    
+====================================
+<label for="fName">
+    <img src="required-icon.jpg" role="presentation" alt="Required">
+    First Name
+</label>
+<input type="text" id="fname" aria-required="true">
+    
+    
+====================================
+<label for="fName">
+    <strong>*</strong>
+    First Name
+</label>
+<input type="text" id="fname" required>Discussion
+    
+    
+====================================
+<div role="alert">
+    
+    
+====================================
+<div aria-live="polite">
+    
+    
+====================================
+<div aria-live="polite" aria-atomic="false">
+    
+    
+====================================
+<div aria-live="polite" aria-atomic="false" relevant="additions removals text">
+    
+    
+==================

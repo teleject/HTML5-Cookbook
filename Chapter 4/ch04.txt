@@ -1,0 +1,362 @@
+chapter: Native Audio
+==================
+<audio src="audio.ogg" controls>
+    Download <a href="audio.ogg">episode 42 of Learning to Love HTML5</a>
+</audio>
+    
+    
+====================================
+<audio src="audio.ogg" controls>
+    
+    
+====================================
+<audio controls>
+    <source src="audio.ogg">
+    <source src="audio.mp3">
+    Download <a href="audio.ogg">episode 42 of Learning to Love HTML5</a>
+</audio>
+    
+    
+====================================
+<audio controls preload>
+    
+    
+====================================
+<audio controls>
+    <source src="audio.ogg">
+    <source src="audio.mp3">
+    <object data="player.swf?audio=audio.mp3">
+        <param name="movie" value="player.swf?audio=audio.mp3">
+        Video and Flash are not supported by your browser.
+    </object>
+</audio>
+    
+    
+====================================
+<audio controls>
+    <source src="audio.ogg">
+    <source src="audio.mp3">
+    Your browser does not support HTML5 audio. You should upgrade. In the
+    meantime, download <a href="audio.ogg">episode 42 of Learning to Love
+    HTML5</a>.
+</audio>
+    
+    
+====================================
+<audio controls loop>
+    
+    
+====================================
+<audio>
+    <source src="audio.ogg">
+    <source src="audio.mp3">
+</audio>
+<button title="Play at 30 seconds" onclick="playAt(30);">30 seconds</button>
+<script>
+    function playAt(seconds){
+        var audio = document.getElementsByTagName("audio")[0];
+        audio.currentTime = seconds;
+        audio.play();
+    }
+</script>
+    
+    
+====================================
+<audio>
+    <source src="audio.ogg">
+    <source src="audio.mp3">
+</audio>
+<button title="Play at 30 seconds" onclick="playAt(30);">30 seconds</button>
+<button title="Stop Audio" onclick="stopAudio();">Stop Audio</button>
+<script>
+    function playAt(seconds){
+        var audio = document.getElementsByTagName("audio")[0];
+        audio.currentTime = seconds;
+        audio.play();
+    }
+    function stopAudio(){
+        var audio = document.getElementsByTagName("audio")[0];
+        audio.currentTime = 0;
+        audio.pause();
+    }
+</script>
+    
+    
+====================================
+<audio src="audio.ogg"></audio>
+<canvas width="512" height="100"></canvas>
+<button title="Generate Waveform" onclick="genWave();">Generate Waveform</button>
+
+<script>
+    function genWave(){
+        var audio = document.getElementsByTagName("audio")[0];
+        var canvas = document.getElementsByTagName("canvas")[0];
+        var context = canvas.getContext('2d');
+        audio.addEventListener("MozAudioAvailable", buildWave, false);
+        function buildWave (event){
+            var channels = audio.mozChannels;
+            var frameBufferLength = audio.mozFrameBufferLength;
+            var fbData = event.frameBuffer;
+            var stepInc = (frameBufferLength / channels) / canvas.width;
+            var waveAmp = canvas.height / 2;
+            canvas.width = canvas.width;
+            context.beginPath();
+            context.moveTo(0, waveAmp - fbData[0] * waveAmp);
+            for(var i=1; i < canvas.width; i++){
+                context.lineTo(i, waveAmp - fbData[i*stepInc] * waveAmp);
+            }
+            context.strokeStyle = "#fff";
+            context.stroke();
+        }
+        audio.play();
+    }
+</script>
+    
+    
+====================================
+<audio src="audio.ogg"></audio>
+<canvas width="512" height="100"></canvas>
+<button title="Generate Waveform" onclick="genWave();">Generate Waveform</button>
+    
+    
+====================================
+<style>
+    canvas {background: #000;}
+</style>
+    
+    
+====================================
+<script>
+    function genWave(){
+    
+    
+====================================
+        var audio = document.getElementsByTagName("audio")[0];
+        var canvas = document.getElementsByTagName("canvas")[0];
+    
+    
+====================================
+        var context = canvas.getContext('2d');
+    
+    
+====================================
+        audio.addEventListener("MozAudioAvailable", buildWave, false);
+    
+    
+====================================
+        function buildWave (event){
+            var channels = audio.mozChannels;
+            var frameBufferLength = audio.mozFrameBufferLength;
+    
+    
+====================================
+            var fbData = event.frameBuffer;
+    
+    
+====================================
+            var stepInc = (frameBufferLength / channels) / canvas.width;
+    
+    
+====================================
+            var waveAmp = canvas.height / 2;
+    
+    
+====================================
+            canvas.width = canvas.width;
+    
+    
+====================================
+            context.beginPath();
+            context.moveTo(0, waveAmp - fbData[0] * waveAmp);
+            for(var i=1; i < canvas.width; i++){
+                context.lineTo(i, waveAmp - fbData[i*stepInc] * waveAmp);
+            }
+            context.strokeStyle = "#fff";
+    
+    
+====================================
+            context.stroke();
+        }
+    
+    
+====================================
+        audio.play();
+    }
+</script>
+    
+    
+====================================
+<div id="player">
+    <audio src="media/audio.mp3"></audio>
+
+    <div class="playerControls">
+        <button id="audioPlay" title="Play"
+            onclick="playPause();">&#x25ba;</button>
+        <button id="audioPause" class="hidden" title="Pause"
+            onclick="playPause();">&#x2590;&#x2590;</button>
+        <button id="audioStop" title="Stop" onclick="playStop();">&#x25a0;</button>
+
+        <div id="audioSeek">
+            <div id="audioLoaded"></div>
+        </div>
+
+        <ul id="audioTimes">
+            <li id="audioElapsed">00:00:00</li>
+            <li id="audioDuration">00:00:00</li>
+      </ul>
+    </div>
+</div>
+    
+    
+====================================
+<script>
+    audio = document.getElementsByTagName("audio")[0];
+    audioDuration = document.getElementById("audioDuration");
+    audioElapsed = document.getElementById("audioElapsed");
+    audioPlay = document.getElementById("audioPlay");
+    audioPause = document.getElementById("audioPause");
+    audioStop = document.getElementById("audioStop");
+    audioLoaded = document.getElementById("audioLoaded");
+    
+    
+====================================
+    audio.addEventListener("loadedmetadata", setDuration, false);
+    audio.addEventListener("timeupdate", setElapsed, false);
+    
+    
+====================================
+    function setDuration(event) {
+        audioDuration.innerHTML = timeFormatter(audio.duration);
+    }
+
+    function setElapsed(event) {
+        audioElapsed.innerHTML = timeFormatter(audio.currentTime);
+        amountLoaded = (audio.currentTime/audio.duration)*100;
+        audioLoaded.style.width = amountLoaded + 'px';
+    }
+    
+    
+====================================
+    function playPause() {
+        if (audio.paused){
+            audio.play();
+            audioPlay.className = 'hidden';
+            audioPause.className = '';
+        } else {
+            audio.pause();
+            audioPlay.className = '';
+            audioPause.className = 'hidden';
+        }
+    }
+    
+    
+====================================
+    function playStop() {
+        audio.pause();
+        audio.currentTime=0;
+        audioPlay.className = '';
+        audioPause.className = 'hidden';
+    }
+    
+    
+====================================
+    function timeFormatter(seconds){
+        function zeroPad(str) {
+            if (str.length > 2) return str;
+            for (i=0; i<(2-str.length); i++) {
+                str = "0" + str;
+            }
+            return str;
+        }
+        var minute = 60,
+            hour = minute * 60,
+            hStr = "",
+            mStr = "",
+            sStr = "";
+
+        var h = Math.floor(seconds / hour);
+        hStr = zeroPad(String(h));
+
+        var m = Math.floor((seconds - (h * hour)) / minute);
+        mStr = zeroPad(String(m));
+
+        var s = Math.floor((seconds - (h * hour)) - (m * minute));
+        sStr = zeroPad(String(s));
+
+        return (hStr + ":" + mStr + ":" + sStr);
+    }
+</script>
+    
+    
+====================================
+#player {
+    height: 50px;
+    padding: 10px;
+    position:relative;
+    width: 300px;
+}
+
+button {
+    background: #666;
+    border:1px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    bottom: 10px;
+    color: #fff;
+    padding: 5px;
+    position:absolute;
+    width:45px;
+}
+
+#audioStop {
+    font-size:22px;
+    left: 65px;
+    line-height: 11px;
+}
+    
+    
+====================================
+#audioPlay.hidden,
+#audioPause.hidden { display:none; }
+
+#audioSeek {
+    background: #ccc;
+    border: 1px solid #000;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    display:block;
+    height:2px;
+}
+    
+    
+====================================
+#audioLoaded {
+    background: #0c0;
+    border: 1px solid #0c0;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    display:block;
+    height:1px;
+}
+    
+    
+====================================
+#audioTimes {
+    float:right;
+    list-style:none;
+    margin: 5px 0 0;
+}
+
+#audioTimes li {
+    font:bold 13px Arial, Helvetica sans-serif;
+    float: left;
+}
+
+#audioTimes li:first-child {
+    border-right: 1px solid #000;
+    margin-right: 15px;
+    padding-right: 15px;
+}
+    
+    
+==================
